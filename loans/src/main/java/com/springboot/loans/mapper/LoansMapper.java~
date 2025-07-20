@@ -1,0 +1,4 @@
+package com.springboot.loans.mapper;
+
+public class LoansMapper {
+}
