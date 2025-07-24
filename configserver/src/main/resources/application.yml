@@ -1,0 +1,43 @@
+spring:
+    application:
+        name: "configserver"
+    profiles:
+        active: git
+#        active: native # this tells the spring cloud config server that I want to activate a native profile of spring cloud config server (needed for classpath usage)
+    cloud:
+        config:
+            server:
+                git:
+                    uri: "https://github.com/Raveesha-dw/microbank-config.git"
+                    default-label: main
+                    timeout: 5
+                    clone-on-start: true # asks to clone the github repo during the startup of the config server
+                    force-pull: true  #override all the local changes done when trying to start/restart your config server ,config server should always read from the master repo
+#                native:
+#                    search-locations: "file:///C://Users//ASUS//Documents//config"
+#                    search-locations: "classpath:/config"
+    rabbitmq:
+        host: "localhost"
+        port: 5672
+        username: "guest"
+        password: "guest"
+
+encrypt:
+    key: "6yF9jC2vB8mK3rQ1L0sD5uN4xW7eZ8Ah"
+server:
+    port: 8071
+
+management: # actuacter related api paths should be enabled
+    endpoints:
+        web:
+            exposure:
+                include: "*"
+    health:
+        readiness-state:
+            enable: true
+        liveness-state:
+            enabled: true
+    endpoint:
+        health:
+            probes:
+                enabled: true

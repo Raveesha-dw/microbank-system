@@ -1,0 +1,11 @@
+build:
+  version: "2.0.0"
+
+loans:
+  message: "Welcome to EliteInvest Loans related QA APIs"
+  contactDetails:
+    name: "Raveesha Weerasinghe - QA Lead"
+    email: "raveesha.weerasinghe22@gmail.com"
+  onCallSupport:
+    - (555) 568-9876
+    - (555) 568-9877

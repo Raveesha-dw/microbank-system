@@ -1,0 +1,11 @@
+build:
+  version: "3.0.0"
+
+accounts:
+  message: "Welcome to EliteInvest Accounts related local APIs"
+  contactDetails:
+    name: "Raveesha Weerasinghe - Developer"
+    email: "raveesha.weerasinghe22@gmail.com"
+  onCallSupport:
+    - (555) 568-2348
+    - (555) 568-2349

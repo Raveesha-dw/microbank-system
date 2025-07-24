@@ -1,0 +1,11 @@
+build:
+  version: "2.0.0"
+
+accounts:
+  message: "Welcome to EliteInvest Accounts related QA APIs"
+  contactDetails:
+    name: "Raveesha Weerasinghe - QA Lead"
+    email: "raveesha.weerasinghe22@gmail.com"
+  onCallSupport:
+    - (666) 345-8765
+    - (666) 345-8766

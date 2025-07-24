@@ -1,0 +1,11 @@
+build:
+  version: "1.0.0"
+
+accounts:
+  message: "Welcome to EliteInvest Accounts related Prod APIs"
+  contactDetails:
+    name: "Raveesha Weerasinghe - Product Owner"
+    email: "raveesha.weerasinghe22@gmail.com"
+  onCallSupport:
+    - (234) 345-9451
+    - (234) 345-9452
