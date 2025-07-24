@@ -1,0 +1,12 @@
+
+build:
+  version: "1.0.0"
+
+loans:
+  message: "Welcome to EliteInvest Loans related Prod APIs"
+  contactDetails:
+    name: "Raveesha Weerasinghe - Product Owner"
+    email: "raveesha.weerasinghe22@gmail.com"
+  onCallSupport:
+    - (555) 568-9876
+    - (555) 568-9877

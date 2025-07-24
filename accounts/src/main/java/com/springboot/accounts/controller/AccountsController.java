@@ -207,8 +207,8 @@ public class AccountsController {
     }
 
     @Operation(
-            summary = "Get Java Version",
-            description = "Get Java Version of accounts microservice"
+            summary = "Get Contact Info",
+            description = "Get Contact Information of accounts microservice"
     )
     @ApiResponses({
             @ApiResponse(
