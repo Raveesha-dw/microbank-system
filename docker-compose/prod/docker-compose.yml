@@ -31,29 +31,29 @@ services:
 
 
   #  rabbit:
-#    image:  rabbitmq:3.13.7-management
-#    hostname: rabbitmq
-#    ports:
-#      - 5672:5672
-#      - 15672:15672
-#    healthcheck:
-#      test: ["CMD", "rabbitmq-diagnostics", "status"]
-#      interval: 10s
-#      timeout: 5s
-#      retries: 10
-#      start_period: 5s
-#    extends:
-#      file: common-config.yml
-#      service: network-deploy-service
+  #    image:  rabbitmq:3.13.7-management
+  #    hostname: rabbitmq
+  #    ports:
+  #      - 5672:5672
+  #      - 15672:15672
+  #    healthcheck:
+  #      test: ["CMD", "rabbitmq-diagnostics", "status"]
+  #      interval: 10s
+  #      timeout: 5s
+  #      retries: 10
+  #      start_period: 5s
+  #    extends:
+  #      file: common-config.yml
+  #      service: network-deploy-service
 
   configserver:
     image: "raveeshaward/configserver:1.0.0"
     container_name: configserver-ms
     ports:
       - "8071:8071"
-#    depends_on:  # if depends_on: rabbit is given, the configserver will start after rabbit has started and will not wait for it to be ready. Will continue to run even if Rabbit fails
-#      rabbit:
-#        condition: service_healthy
+    #    depends_on:  # if depends_on: rabbit is given, the configserver will start after rabbit has started and will not wait for it to be ready. Will continue to run even if Rabbit fails
+    #      rabbit:
+    #        condition: service_healthy
     healthcheck:
       test: "curl --fail --silent localhost:8071/actuator/health/readiness | grep UP || exit 1"
       interval: 10s
