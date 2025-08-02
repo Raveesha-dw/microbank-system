@@ -44,9 +44,17 @@ management: # actuacter related api paths should be enabled
     web:
       exposure:
         include: "*"
+  health:
+    readiness-state:
+      enable: true
+    liveness-state:
+      enabled: true
   endpoint:
     shutdown:
       access: unrestricted  #This allows unrestricted access to the /actuator/shutdown endpoint, meaning anyone can shut down the application
+    health:
+      probes:
+        enabled: true
   info:
     env:   #This exposes environment properties (like system environment variables) in the /actuator/info endpoint
       enabled: true
@@ -67,5 +75,10 @@ info:
   app:
     name: "accounts"
     description: "Accounts Microservice"
-    version: "1.2.0"
+    version: "2.0.0"
 
+logging:
+  level:
+    com:
+      springboot:
+        accounts: DEBUG

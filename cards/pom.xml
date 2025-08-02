@@ -142,7 +142,7 @@
 				<version>3.4.6</version>
 				<configuration>
 					<to>
-						<image>raveeshaward/${project.artifactId}:1.2.0</image>
+						<image>raveeshaward/${project.artifactId}:2.0.0</image>
 					</to>
 				</configuration>
 			</plugin>

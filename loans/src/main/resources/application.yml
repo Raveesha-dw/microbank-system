@@ -43,9 +43,17 @@ management:
     web:
       exposure:
         include: "*"
+  health:
+    readiness-state:
+      enable: true
+    liveness-state:
+      enabled: true
   endpoint:
     shutdown:
       access: unrestricted
+    health:
+      probes:
+        enabled: true
   info:
     env:
       enabled: true
@@ -64,4 +72,10 @@ info:
   app:
     name: "loans"
     description: "Loans Microservice"
-    version: "1.2.0"
+    version: "2.0.0"
+
+logging:
+  level:
+    com:
+      springboot:
+        loans: DEBUG
