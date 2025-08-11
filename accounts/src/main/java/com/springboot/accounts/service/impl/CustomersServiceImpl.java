@@ -1,10 +1,10 @@
 package com.springboot.accounts.service.impl;
 
-import com.springboot.accounts.dto.CustomerDetailsDto;
-import com.springboot.accounts.dto.CustomerDto;
+import com.springboot.accounts.dto.*;
 import com.springboot.accounts.entity.Accounts;
 import com.springboot.accounts.entity.Customer;
 import com.springboot.accounts.exception.ResourceNotFoundException;
+import com.springboot.accounts.mapper.AccountsMapper;
 import com.springboot.accounts.mapper.CustomerMapper;
 import com.springboot.accounts.repository.AccountsRepository;
 import com.springboot.accounts.repository.CustomerRepository;
@@ -12,18 +12,30 @@ import com.springboot.accounts.service.ICustomersService;
 import com.springboot.accounts.service.client.CardsFeignClient;
 import com.springboot.accounts.service.client.LoansFeignClient;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
+//@AllArgsConstructor
 public class CustomersServiceImpl implements ICustomersService {
 
-    private AccountsRepository accountsRepository;
-    private CustomerRepository customerRepository;
-    private CardsFeignClient cardsFeignClient;
-    private LoansFeignClient loansFeignClient;
+    private final AccountsRepository accountsRepository;
+    private final CustomerRepository customerRepository;
+    private final CardsFeignClient cardsFeignClient;
+    private final LoansFeignClient loansFeignClient;
+
+    public CustomersServiceImpl(AccountsRepository accountsRepository,
+                                CustomerRepository customerRepository,
+                                CardsFeignClient cardsFeignClient,
+                                LoansFeignClient loansFeignClient) {
+        this.accountsRepository = accountsRepository;
+        this.customerRepository = customerRepository;
+        this.cardsFeignClient = cardsFeignClient;
+        this.loansFeignClient = loansFeignClient;
+    }
     @Override
-    public CustomerDto fetchCustomerDetails(String mobileNumber) {
+    public CustomerDetailsDto fetchCustomerDetails(String mobileNumber, String correlationId) {
         Customer customer = customerRepository.findByMobileNumber(mobileNumber).orElseThrow(
                 () -> new ResourceNotFoundException("Customer", "Mobile Number", mobileNumber)
         );
@@ -33,5 +45,18 @@ public class CustomersServiceImpl implements ICustomersService {
         );
 
         CustomerDetailsDto customerDetailsDto = CustomerMapper.mapToCustomerDetailsDto(customer, new CustomerDetailsDto());
+        customerDetailsDto.setAccountsDto(AccountsMapper.mapToAccountsDto(account, new AccountsDto()));
+
+        ResponseEntity<LoansDto> loansDto = loansFeignClient.fetchLoanDetails(correlationId, mobileNumber);
+        if (loansDto != null){
+            customerDetailsDto.setLoansDto(loansDto.getBody());
+        }
+
+        ResponseEntity<CardsDto> cardsDto = cardsFeignClient.fetchCardDetails(correlationId, mobileNumber);
+        if (cardsDto != null){
+            customerDetailsDto.setCardsDto(cardsDto.getBody());
+        }
+
+        return customerDetailsDto;
     }
 }

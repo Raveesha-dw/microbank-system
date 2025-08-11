@@ -57,6 +57,10 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-circuitbreaker-resilience4j</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -147,7 +151,7 @@
 				<version>3.4.6</version>
 				<configuration>
 					<to>
-						<image>raveeshaward/${project.artifactId}:1.2.0</image>
+						<image>raveeshaward/${project.artifactId}:2.0.0</image>
 					</to>
 				</configuration>
 			</plugin>
