@@ -41,3 +41,6 @@ management: # actuacter related api paths should be enabled
         health:
             probes:
                 enabled: true
+    metrics:
+        tags:
+            application: ${spring.application.name}

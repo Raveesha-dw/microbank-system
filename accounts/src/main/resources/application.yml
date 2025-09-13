@@ -62,6 +62,9 @@ management: # actuacter related api paths should be enabled
     env:   #This exposes environment properties (like system environment variables) in the /actuator/info endpoint
       enabled: true
         # enable actuator endpoint that will allow refreshing properties at runtime
+  metrics:
+    tags:
+      application: ${spring.application.name}  #This sets the application name in the /actuator/metrics endpoint. all metric will be grouped under this
 
 
 #This configures the microservice as a Eureka client, so it can register itself with a Eureka server
@@ -85,6 +88,8 @@ logging:
     com:
       springboot:
         accounts: DEBUG
+  pattern:
+    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
 
 resilience4j.circuitbreaker:
   configs:
@@ -105,4 +110,12 @@ resilience4j.retry:
         - java.lang.NullPointerException
       retryExceptions:
         - java.util.concurrent.TimeoutException
+
+resilience4j.ratelimiter:
+  configs:
+    default:
+      timeoutDuration: 1000
+      limitForPeriod: 1
+      limitRefreshPeriod: 5000
+
 
