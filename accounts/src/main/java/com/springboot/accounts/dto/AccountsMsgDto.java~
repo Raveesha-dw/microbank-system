@@ -1,0 +1,4 @@
+package com.springboot.accounts.dto;
+
+public record AccountsMsgDto() {
+}

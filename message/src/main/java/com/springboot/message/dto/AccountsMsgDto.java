@@ -1,0 +1,4 @@
+package com.springboot.message.dto;
+
+public record AccountsMsgDto(Long accountNumber, String name, String email, String mobileNumber) {
+}
